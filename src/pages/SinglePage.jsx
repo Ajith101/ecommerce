@@ -3,9 +3,12 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "../ApiServices/useFetch";
 import Container from "../components/layout/Container";
 import Loader from "../components/loader/Loader";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../components/redux/features/productSlice";
 
 const SinglePage = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { productList, loading } = useFetch(`/products/${id}`);
 
   return (
@@ -58,7 +61,12 @@ const SinglePage = () => {
                     <button className="bg-sky-600 hover:opacity-80 cursor-pointer text-white px-[30px] lg:px-[60px] py-[10px] rounded-[4px] font-[600]">
                       Buy Now
                     </button>
-                    <button className="bg-teal-600 hover:opacity-80 cursor-pointer text-white px-[60px] py-[10px] rounded-[4px] font-[600]">
+                    <button
+                      onClick={() =>
+                        dispatch(addToCart({ ...productList, qty: 1 }))
+                      }
+                      className="bg-teal-600 hover:opacity-80 cursor-pointer text-white px-[60px] py-[10px] rounded-[4px] font-[600]"
+                    >
                       Add To Cart
                     </button>
                   </div>

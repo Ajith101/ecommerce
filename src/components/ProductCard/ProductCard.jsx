@@ -1,7 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../redux/features/productSlice";
 
 const ProductCard = ({ item }) => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   return (
     <div className="flex items-center relative flex-col justify-between p-[10px] shadow-md sm:shadow-new rounded-[4px]">
@@ -26,7 +30,10 @@ const ProductCard = ({ item }) => {
         </h2>
       </div>
       <div className="">
-        <button className="rounded-[4px] border-[2px] border-slate-400 px-[20px] py-[5px]">
+        <button
+          onClick={() => dispatch(addToCart({ ...item, qty: 1 }))}
+          className="rounded-[4px] border-[2px] border-slate-400 px-[20px] py-[5px]"
+        >
           Add To Cart
         </button>
       </div>

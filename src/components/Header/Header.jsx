@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RiMenu3Fill } from "react-icons/ri";
+import { BsCart } from "react-icons/bs";
 import MobileNav from "./MobileNav";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { cartItemes } = useSelector((state) => ({ ...state.products }));
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
@@ -38,6 +41,21 @@ const Header = () => {
         </div>
       </div>
       {menu && <MobileNav setMenu={setMenu} />}
+      {cartItemes && (
+        <>
+          <BsCart
+            onClick={() => navigate("/cart")}
+            size={"25px"}
+            className="fixed top-8 right-10 z-40 text-blue-600 cursor-pointer"
+          />
+          <div
+            onClick={() => navigate("/cart")}
+            className="cursor-pointer fixed flex justify-center items-center z-40 top-5 right-5 w-[25px] h-[25px] rounded-full bg-pink-600 text-white"
+          >
+            {cartItemes?.length}
+          </div>
+        </>
+      )}
     </>
   );
 };
