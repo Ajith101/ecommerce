@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useFetch } from "../../ApiServices/useFetch";
 import { useNavigate } from "react-router-dom";
 
 const Carousel = ({ productList }) => {
-  const [currentPAge, setCurrentPage] = useState(0);
+  const randomNumber = Math.ceil(Math.random() * productList.length - 1);
+  const [currentPAge, setCurrentPage] = useState(randomNumber);
   const navigate = useNavigate();
 
   useEffect(() => {
