@@ -9,30 +9,30 @@ import { addToCart } from "../components/redux/features/productSlice";
 const SinglePage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { productList, loading } = useFetch(`/products/${id}`);
+  const { productList, loading } = useFetch(`api/products/${id}`);
 
   return (
     <Container>
-      <div className="min-h-[100vh] my-[25px] flex flex-col md:flex-row gap-[60px]">
+      <div className="my-[25px] flex min-h-[100vh] flex-col gap-[60px] md:flex-row">
         {loading ? (
           <Loader />
         ) : (
           <>
             {productList ? (
               <>
-                <div className="md:w-[450px] w-full h-[320px] flex justify-center items-center md:h-[550px]">
+                <div className="flex h-[320px] w-full items-center justify-center md:h-[550px] md:w-[450px]">
                   <img
                     src={productList?.image}
-                    className="w-full h-full object-contain"
+                    className="h-full w-full object-contain"
                     alt=""
                   />
                 </div>
-                <div className="flex flex-col gap-[20px] w-full lg:w-[50%]">
+                <div className="flex w-full flex-col gap-[20px] lg:w-[50%]">
                   <div className="flex flex-col gap-[5px]">
                     <h2 className="text-[16px] text-slate-400">
                       {productList?.category}
                     </h2>
-                    <h2 className="sm:text-[32px] text-[22px] font-[700]">
+                    <h2 className="text-[22px] font-[700] sm:text-[32px]">
                       {productList?.title}
                     </h2>
                   </div>
@@ -57,15 +57,15 @@ const SinglePage = () => {
                       {productList?.rating?.count} nos
                     </span>
                   </h2>
-                  <div className="flex justify-start items-center gap-2 md:gap-5">
-                    <button className="bg-sky-600 hover:opacity-80 cursor-pointer text-white px-[30px] lg:px-[60px] py-[10px] rounded-[4px] font-[600]">
+                  <div className="flex items-center justify-start gap-2 md:gap-5">
+                    <button className="cursor-pointer rounded-[4px] bg-sky-600 px-[30px] py-[10px] font-[600] text-white hover:opacity-80 lg:px-[60px]">
                       Buy Now
                     </button>
                     <button
                       onClick={() =>
                         dispatch(addToCart({ ...productList, qty: 1 }))
                       }
-                      className="bg-teal-600 hover:opacity-80 cursor-pointer text-white px-[60px] py-[10px] rounded-[4px] font-[600]"
+                      className="cursor-pointer rounded-[4px] bg-teal-600 px-[60px] py-[10px] font-[600] text-white hover:opacity-80"
                     >
                       Add To Cart
                     </button>
@@ -73,7 +73,7 @@ const SinglePage = () => {
                 </div>
               </>
             ) : (
-              <div className="flex justify-center items-center text-[22px]">
+              <div className="flex items-center justify-center text-[22px]">
                 No Itemes Found
               </div>
             )}

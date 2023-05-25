@@ -5,7 +5,7 @@ export const useFetch = (link) => {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = "https://fakestoreapi.com";
+  const BASE_URL = "https://ecommerce-backend-new.vercel.app/";
 
   const getDatas = async () => {
     const response = await axios.get(`${BASE_URL}${link}`);
