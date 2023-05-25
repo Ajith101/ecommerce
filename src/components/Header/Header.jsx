@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RiMenu3Fill } from "react-icons/ri";
+import { AiOutlineClose } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import MobileNav from "./MobileNav";
 import { useSelector } from "react-redux";
@@ -12,18 +13,26 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-between bg-black px-[15px] sm:px-10 py-5 text-white items-center text-[16px] font-[700] w-full">
+      <div className="relative flex h-full w-full items-center justify-between bg-slate-800 px-[15px] py-5 text-[16px] font-[700] text-white sm:px-10">
         <div className="logo">
           <h2
             onClick={() => navigate("/")}
-            className="sm:text-[32px] text-[26px] cursor-pointer"
+            className="cursor-pointer text-[26px] sm:text-[32px]"
           >
             Shopping App
           </h2>
         </div>
-        <div className="hidden sm:block">
-          <ul className="flex items-center justify-center gap-5 font-[600] cursor-pointer">
-            <li className="hover:opacity-60">
+
+        <div className="">
+          <ul className="flex cursor-pointer items-center justify-center gap-5 font-[600]">
+            <li onClick={() => navigate("/cart")} className="relative">
+              <BsCart size={"25px"} className="cursor-pointer text-white" />
+              <div className="z-100 absolute right-[-15px] top-[-15px] flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full border-[1px] border-white bg-slate-400 text-white">
+                {cartItemes?.length}
+              </div>
+            </li>
+
+            <li className="hidden hover:opacity-60 sm:block">
               <NavLink
                 to="/"
                 className={({ isActive, isPending }) =>
@@ -33,29 +42,20 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            <li className="hover:opacity-60">Products</li>
+            <li className="hidden hover:opacity-60 sm:block">Products</li>
+            <li className="sm:hidden">
+              <div onClick={() => setMenu((pre) => !pre)} className="sm:hidden">
+                {menu ? (
+                  <AiOutlineClose size={"25px"} />
+                ) : (
+                  <RiMenu3Fill size={"25px"} />
+                )}
+              </div>
+            </li>
           </ul>
         </div>
-        <div onClick={() => setMenu((pre) => !pre)} className="sm:hidden">
-          <RiMenu3Fill size={"25px"} />
-        </div>
+        {/* <MobileNav menu={menu} setMenu={setMenu} /> */}
       </div>
-      {menu && <MobileNav setMenu={setMenu} />}
-      {cartItemes && (
-        <>
-          <BsCart
-            onClick={() => navigate("/cart")}
-            size={"25px"}
-            className="fixed top-8 right-10 z-40 text-blue-600 cursor-pointer"
-          />
-          <div
-            onClick={() => navigate("/cart")}
-            className="cursor-pointer fixed flex justify-center items-center z-40 top-5 right-5 w-[25px] h-[25px] rounded-full bg-pink-600 text-white"
-          >
-            {cartItemes?.length}
-          </div>
-        </>
-      )}
     </>
   );
 };

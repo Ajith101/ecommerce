@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "./components/redux/store";
 import CartList from "./components/cart/CartList";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/products/:id" element={<SinglePage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/cart" element={<CartList />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

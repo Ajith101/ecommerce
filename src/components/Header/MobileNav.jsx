@@ -1,10 +1,13 @@
 import React from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
-const MobileNav = ({ setMenu }) => {
+const MobileNav = ({ menu, setMenu }) => {
   return (
-    <div className="sm:hidden z-30 top-0 fixed w-2/3 bg-black text-white right-0 h-screen flex justify-center items-center">
+    <div
+      className={`absolute top-[100%] z-40 sm:hidden ${
+        menu ? "right-0" : "right-[-100%]"
+      } flex h-screen w-2/3 items-center justify-center bg-slate-800 text-white transition-all duration-500 ease-in`}
+    >
       <ul className="flex flex-col gap-5">
         <li className="hover:opacity-60">
           <NavLink
@@ -14,10 +17,25 @@ const MobileNav = ({ setMenu }) => {
             Home
           </NavLink>
         </li>
+        <li className="hover:opacity-60">
+          <NavLink
+            onClick={() => setMenu(false)}
+            to="/signup"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Sign Up
+          </NavLink>
+        </li>
+        <li className="hover:opacity-60">
+          <NavLink
+            onClick={() => setMenu(false)}
+            to="/signin"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            Sign In
+          </NavLink>
+        </li>
       </ul>
-      <div className="fixed top-[25px] right-[25px] cursor-pointer">
-        <AiOutlineClose onClick={() => setMenu(false)} size={"25px"} />
-      </div>
     </div>
   );
 };

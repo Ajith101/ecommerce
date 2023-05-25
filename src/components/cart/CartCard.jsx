@@ -12,24 +12,24 @@ const CartCard = ({ item }) => {
   const dispatch = useDispatch();
   return (
     <>
-      <div className="flex w-full h-full border-b-[1px] pb-[10px] gap-3">
-        <div className="w-[80px] h-[80px]">
+      <div className="flex h-full w-full justify-between gap-[5px] border-b-[1px] pb-[10px] md:w-fit">
+        <div className="h-[80px] w-[80px]">
           <img
             onClick={() => navigate(`/products/${item.id}`)}
             src={item.image}
-            className="w-full h-full object-cover cursor-pointer"
+            className="h-full w-full cursor-pointer object-cover"
             alt=""
           />
         </div>{" "}
-        <div className="min-w-[250px] w-[250px]">
+        <div className="w-[40%] md:w-[250px]">
           <h2
             onClick={() => navigate(`/products/${item.id}`)}
-            className="text-[16px] text-slate-600 cursor-pointer"
+            className="cursor-pointer text-[16px] text-slate-600"
           >
             {item.title}
           </h2>
         </div>
-        <div className="flex justify-center gap-5 max-w-[80px] h-full">
+        <div className="flex h-full max-w-[80px] justify-center gap-5">
           <div>
             <button
               onClick={() => {
@@ -37,7 +37,7 @@ const CartCard = ({ item }) => {
                   ? dispatch(removeItemes(item.id))
                   : dispatch(decreaseQty(item.id));
               }}
-              className="shadow-xl w-[35px] h-[35px] border-[1px] text-center p-[2px] rounded-full flex justify-center items-center text-[35px]"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full border-[1px] p-[2px] text-center text-[35px] shadow-xl"
             >
               {"-"}
             </button>
@@ -46,20 +46,20 @@ const CartCard = ({ item }) => {
           <div>
             <button
               onClick={() => dispatch(increaseQty(item.id))}
-              className="shadow-xl w-[35px] h-[35px] border-[1px] text-center p-[2px] rounded-full flex justify-center items-center text-[18px]"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full border-[1px] p-[2px] text-center text-[18px] shadow-xl"
             >
               +
             </button>
           </div>
         </div>
-        <div className="max-w-[120px] flex flex-col justify-between ml-[20px]">
-          <h2 className="text-center text-slate-600">
+        <div className="flex max-w-[120px] flex-col justify-between">
+          <h2 className="ml-[20px] text-center text-slate-600">
             {"$ "}
             <span className="text-black">{item.price}</span>
           </h2>
           <h2
             onClick={() => dispatch(removeItemes(item.id))}
-            className="text-red-500 cursor-pointer"
+            className="cursor-pointer text-red-500"
           >
             Remove
           </h2>

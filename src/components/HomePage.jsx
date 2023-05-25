@@ -21,10 +21,10 @@ const HomePage = () => {
       {loading && <Loader />}
       <Container>
         {!loading && <Carousel productList={products} />}
-        <div className="min-h-[100vh] mb-[40px]">
+        <div className="mb-[40px] min-h-[100vh]">
           <div className="">
-            <h2 className="text-[18px] mb-[25px]">FEATURED PRODUCTTS</h2>
-            <div className="grid sm:grid-cols-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-[5px] gap-x-[5px] sm:gap-x-[20px] sm:gap-y-[20px]">
+            <h2 className="mb-[25px] text-[18px]">FEATURED PRODUCTTS</h2>
+            <div className="grid grid-cols-2 gap-x-[5px] gap-y-[5px] sm:grid-cols-3 sm:gap-x-[20px] sm:gap-y-[20px] md:grid-cols-4 lg:grid-cols-5">
               {products?.map((item) => {
                 return <ProductCard item={item} key={item.id} />;
               })}
